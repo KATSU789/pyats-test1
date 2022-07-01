@@ -1,0 +1,31 @@
+devices:
+  core-rtr01:
+    os: iosxr
+    type: router
+    connections:
+      telnet:
+        ip: 10.10.20.173
+        port: 23
+        protocol: telnet
+        proxy: jump_host
+        arguments:
+         init_exec_commands: [ter le 0]
+         init_config_commands: []
+    credentials:
+      default:
+        password: cisco
+        username: cisco
+
+
+  jump_host:
+    os: linux
+    type: linux
+    connections:
+      ssh:
+        ip: 10.10.20.50
+        port: 22
+        protocol: ssh
+    credentials:
+      default:
+        password: C1sco12345
+        username: developer
