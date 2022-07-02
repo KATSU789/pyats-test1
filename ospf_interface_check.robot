@@ -24,8 +24,8 @@ ${device1}     core-rtr01
     @{before}  dq query  data=${parse}   filters=contains('Gi0/0/0/2').get_values('state')    
   
 IFのダウンと確認
-    configure_interfaces_shutdown  interfaces=@{interfaces}  device=core-rtr01
-    ${result}   verify_interface_state_down  interface=${interface}  device=core-rtr01  max_time=${6}  check_interval=${3}
+    configure_interfaces_shutdown  interfaces=@{interfaces}  device=${device1}
+    ${result}   verify_interface_state_down  interface=${interface}  device=${device1}  max_time=${6}  check_interval=${3}
     Should Not Be True  ${result}
     Log                 ${result}
 
@@ -36,8 +36,8 @@ OSPFのIF状態がダウンしているか確認
     Log                         @{after}
 
 IFをアップ状態へ戻す
-    configure interfaces unshutdown  device=core-rtr01  interfaces=@{interfaces}
-    ${result}   verify_interface_state_up  interface=${interface}  device=core-rtr01  max_time=${6}  check_interval=${3}
+    configure interfaces unshutdown  device=${device1}  interfaces=@{interfaces}
+    ${result}   verify_interface_state_up  interface=${interface}  device=${device1}  max_time=${6}  check_interval=${3}
     Should Be True  ${result}
     Log             ${result}
 
